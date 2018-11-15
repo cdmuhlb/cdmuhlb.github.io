@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Product reviews on Curran D. Muhlberger</title>
+    <link>http://www.muhlbergerweb.com/writing/product_reviews/</link>
+    <description>Recent content in Product reviews on Curran D. Muhlberger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Nov 2012 11:00:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.muhlbergerweb.com/writing/product_reviews/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pentax K-5 review</title>
+      <link>http://www.muhlbergerweb.com/writing/product_reviews/pentax_k5_review/</link>
+      <pubDate>Fri, 30 Nov 2012 11:00:00 -0500</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/product_reviews/pentax_k5_review/</guid>
+      <description>Simply one of the best APS-C DSLRs you can buy. The 14-bit sensor offers tremendous dynamic range, allowing raw files processed in Lightroom 4 to exhibit fantastic detail in all tonal regions. Judging from more technical reviews, it appears to offer the best image quality to be found short of full-frame. And Pentax’s ergonomics and user interfaces are always comfortable and intuitive, offering easy access to the controls you actually want.</description>
+    </item>
+    
+  </channel>
+</rss>

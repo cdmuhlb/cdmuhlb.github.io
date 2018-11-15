@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polynomial fitting pitfalls · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Polynomial fitting pitfalls <small><time datetime="2013-09-29T17:25:00-04:00">September 29, 2013</time></small></h1>
+        <p class="lead">The dangers of power series</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p>A common task in research is to represent trends in a dataset by a smooth analytic function.  If a physical model for the trend exists, then the goal is to fit for the parameters of the model.  In other situations, however, no good model is available, so one tries instead to represent the trend with a general functional form or a basis function expansion.  Polynomials are a popular choice, partially thanks to their general familiarity and their role in Taylor series.  What many practitioners might not realize, however, is that there is more than one way to represent a polynomial fit.</p>
+    <p>Intuition does us a disservice in this context.  When we think of a polynomial, we undoubtedly consider the form
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+<mrow>
+<msub><mi>a</mi><mn>0</mn></msub><mo>+</mo>
+<msub><mi>a</mi><mn>1</mn></msub><mo>&#8290;</mo><mi>x</mi><mo>+</mo>
+<msub><mi>a</mi><mn>2</mn></msub><mo>&#8290;</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo>
+<mo>…</mo>
+</mrow>
+</math>
+In the context of fitting data, then, it seems natural to fit for the coefficients
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>a</mi><mi>n</mi></msub></mrow></math>
+(which can be done efficiently using linear least squares).  This can have serious consequences, though, especially if the order of the polynomial is high (which is likely when you care about accuracy the most!).  When implemented with finite-precision numerics, this power series form is very ill-conditioned (in fact, in the context of spectral methods, the power series basis gives rise to the Hilbert matrix - see “Method of moments” in <a href="http://www-personal.umich.edu/~jpboyd/BOOK_Spectral2000.html">Boyd</a> §3.1).  What this means is that small errors in your fitting coefficients can produce large errors when the polynomial is evaluated.</p>
+    <p>So what are the alternatives?  Fortunately, one doesn’t have to give up the familiarity of polynomials nor the convenience of linear least squares.  One must simply choose a different polynomial basis than the “power series” basis of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>x</mi><mi>n</mi></msup></mrow></math>.
+In particular, orthogonal polynomials like Chebyshev and Legendre polynomials produce much more robust results.  So instead of solving for the coefficients of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>x</mi><mi>n</mi></msup></mrow></math>,
+we solve for the coefficients of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>T</mi><mi>n</mi></msub><mo>&#8289;</mo><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>,
+for example.</p>
+<p>And lest you think this is of merely theoretical importance, here is an example from the astronomical literature.  In 1996, <a href="http://adsabs.harvard.edu/doi/10.1086/177785">Flower</a> published a set of polynomial fits for determining intrinsic properties of stars from observations made on Earth.  In particular, they presented a 7th-order fit for determining the effective temperature (T<sub>eff</sub>) of a star from its color (B-V).  Unfortunately, you can’t use these fits as they appear in the original publication; not only are they riddled with typos, but the precision of the coefficients as printed is insufficient to faithfully reproduce the results for the reason discussed above.  Fortunately, <a href="http://iopscience.iop.org/1538-3881/140/5/1158/">Torrres</a> published corrections to these fits in 2007, enabling us to explore the robustness of an alternative polynomial representation.</p>
+    <img class="img-responsive" src="/assets/images/articles/polynomial_fitting_pitfalls-fig-1.svg" alt="Plot comparing polynomial representations" />
+    <p>For this comparison, I first computed the Chebyshev coefficients of this fitting polynomial (this was done symbolically, resulting in almost perfect agreement when the two forms are evaluated numerically; see figure above).  When evaluating these polynomials, I used Horner’s method for the power series form and Clenshaw’s algorithm for the Chebyshev series.  With these pieces in place, we can compare how the two representations fare in different circumstances.  First, let’s examine how much accuracy is lost when the functions are evaluated in single-precision:</p>
+    <img class="img-responsive" src="/assets/images/articles/polynomial_fitting_pitfalls-fig-2.svg" alt="Plot of errors from single precision" />
+    <p>While the Chebyshev form remains accurate over the whole domain, the power series form exhibits growing errors as B-V grows farther from zero.</p>
+    <p>Next, let’s see what we get when the coefficients are truncated to 6 decimal places (the same precision as in the original paper, but without the typos).</p>
+    <img class="img-responsive" src="/assets/images/articles/polynomial_fitting_pitfalls-fig-3.svg" alt="Plot of errors from truncating coefficients to 6 decimal places" />
+    <p>Again, while the magnitude of the error may be small, we see that it is poorly controlled as B-V deviates from zero, while the Chebyshev results are robust across the domain under this perturbation to the coefficients.</p>
+    <p>Finally, let’s consider the situation where we would like to reduce the order of the fit.  Intuitively, we expect high-order terms to be less important than low-order ones, since we expect the coefficients of a convergent series to approach zero as the order approaches infinity.  However, dropping terms from a power series fit is disastrous away from
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>.
+The truncated Chebyshev series, on the other hand, remains a good approximation:</p>
+    <img class="img-responsive" src="/assets/images/articles/polynomial_fitting_pitfalls-fig-4.svg" alt="Plot comparing reduced-order polynomial representations" />
+    <p>So the next time you’re considering a polynomial fit to represent a trend in your data, choose an orthogonal basis when performing linear least squares; the trustworthiness of your results depends on it.</p>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Objects vs. actors · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Objects vs. actors <small><time datetime="2013-08-12T00:39:49-04:00">August 12, 2013</time></small></h1>
+        <p class="lead">A comparison of abstractions</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p><a href="http://www.reactivemanifesto.org/">Reactive programming</a> is all the rage these days, and it brings with it a suite of new abstractions and paradigms.  The <a href="http://www.scala-lang.org/">Scala</a> language provides a fantastic environment for deploying these new reactive techniques, bridging the gap between functional and object-oriented programming and enabling clean interfaces for tools like futures and actors.  While the Internet is already full of information and tutorials about these concepts, I thought a simple comparison of some of the core abstractions might help clarify things in a learner’s mind.</p>
+    <p>We’ll be looking at “traditional” objects, “functional” objects, and actors in terms of three defining properties: <strong>state</strong>, <strong>identity</strong>, and <strong>behavior</strong>.</p>
+    <p>As our starting point, consider traditional objects, which are often characterized by <em>mutable state</em>, <em>equality by identity</em>, and <em>synchronous behavior via method calls</em>.  Languages like Java facilitate this model of objects: member variables are mutable by default, and <code>==</code> always represents the identity operator.  Unfortunately, this model of objects has some serious weaknesses in the reactive era: public mutable state presents a host of issues in concurrent environments, solving those issues with locks ruins scalability when method calls are synchronous, and the concept of identity becomes nebulous in the presence of distributed computing.</p>
+    <p>These properties also make traditional objects incompatible with functional programming, but with a few tweaks, we can define “functional” objects that bring many of the benefits of object-oriented programming to functional contexts.  Such objects have <em>immutable state</em> and implement <em>logical equality</em> while still providing <em>behavior via synchronous method calls</em>.  As a result, they’re safe to use in concurrent and distributed environments.</p>
+    <p>But sometimes mutable state and identity are desirable when modeling a particular program component.  Is there a way to make them scalable?  It turns out there is, by tweaking the “behavior” property;  this gives us actors.  Actors are characterized by <em>mutable state</em>, <em>equality by identity</em>, and <em>asynchronous behavior via message passing</em>.  By making their behavior asynchronous, actors’ states are only modified by a single thread at a time, and their clients do not block when another client’s work is being performed.</p>
+    <p>So objects and actors are really just different permutations of specifying the properties of <em>state</em>, <em>identity</em>, and <em>behavior</em>.  By comparing them in this way, you’ll have a better idea of which is more appropriate for the task at hand.  The following table summarizes what we’ve covered:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Traditional objects</th>
+          <th>Functional objects</th>
+          <th>Actors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>State</th>
+          <td>Mutable state</td>
+          <td>Immutable state</td>
+          <td>Mutable state</td>
+        </tr>
+        <tr>
+          <th>Identity</th>
+          <td>Equality by identity</td>
+          <td>Logical equality</td>
+          <td>Equality by global identity</td>
+        </tr>
+        <tr>
+          <th>Behavior</th>
+          <td>Synchronous method calls</td>
+          <td>Synchronous method calls</td>
+          <td>Asynchronous message passing</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Software · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li class="active"><a href="/software/">Software</a></li>
+
+        <li><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="page-header">
+      <h1>Software</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 col-sm-push-8">
+    <p>
+      <img class="img-responsive img-rounded" src="/assets/images/IMGP0151-768.jpg" alt="Laptop keyboard" />
+    </p>
+    <h2>Subpages</h2>
+    <div class="list-group">
+      <a class="list-group-item" href="/software/projects/">
+	<h4 class="list-group-item-heading">Projects <small>updated April 23, 2017</small></h4>
+	<p class="list-group-item-text">Catalog of programs I have written</p>
+      </a>
+    </div>
+  </div>
+  <div class="col-sm-8 col-sm-pull-4">
+    <p class="lead">Software I have written.</p>
+    <p>I have been writing software since QBASIC in elementary school, and I spend a great deal of my time, both working and recreational, learning all I can about new languages, libraries, and algorithms.  Programming is more than a skill to me – it’s a passion.</p>
+    <p>I’ll take this opportunity to mention that my current language of choice is <a href="http://www.scala-lang.org/">Scala</a>.  Previously it was Java, which I taught myself back in high school.  I also like C for pedagogical reasons, and I regularly use C++ when writing numerical code.  Being strongly in favor of static typing, I am not a fan of most scripting languages, Python included.  For a while I was intrigued by <a href="http://x10-lang.org/">X10</a> and Fortress, but nowadays I am most excited by <a href="https://www.rust-lang.org/">Rust</a>.</p>
+    <p>One’s language preferences are often shaped by the libraries and frameworks available for them.  Past favorites include <a href="http://akka.io/">Akka</a>, MPI, <a href="http://www.fftw.org/">FFTW</a>, BLAS/LAPACK, and <a href="https://developer.nvidia.com/thrust">Thrust</a>, along with <a href="http://docs.scala-lang.org/overviews/collections/introduction.html">Scala’s collections framework</a> and the Java Class Library.  And I’ve recently been intrigued by <a href="http://stanford-ppl.github.io/Delite/">Delite</a> and <a href="http://legion.stanford.edu/">Legion</a> as having potential for achieving high productivity <em>and</em> high performance.  Along similar lines, <a href="http://halide-lang.org/">Halide</a> is inspiring for its separation of logic and execution (without giving up control over either).</p>
+    <p>I write most of my code in either <a href="https://netbeans.org/">NetBeans</a> or <a href="http://www.vim.org/">Vim</a>.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h2>Projects</h2>
+    <p>See my <a href="/software/projects/">projects</a> page for a reasonably complete list of my programming experience.</p>
+    <p>Most of the code I wrote in grad school was contributed to the <a href="http://www.black-holes.org/SpEC.html">Spectral Einstein Code</a>, which unfortunately is not open-source (yet).  However, I have just started pushing some of my personal projects to <a href="https://github.com/cdmuhlb">GitHub</a> and <a href="http://bl.ocks.org/cdmuhlb">bl.ocks.org</a>.  This currently represents only a tiny fraction of my programming output, but it should become more complete over time.</p>
+    <p>Some of my more interesting programming projects hosted there include:</p>
+    <ul>
+      <li><a href="https://github.com/cdmuhlb/FloatingPyramids">FloatingPyramids</a>: A program to perform dynamic range reduction of images using state-of-the-art algorithms</li>
+      <li><a href="https://github.com/cdmuhlb/DGenerate">DGenerate</a>: A scalable discontinuous Galerkin solver</li>
+      <li><a href="https://github.com/cdmuhlb/TooMassFun">TooMassFun</a>: A suite of tools to render images of the Milky Way from 2MASS data; see <a href="/writing/blog/coloring_the_galaxy/">Coloring the galaxy</a></li>
+    </ul>
+    <p>I have also written a considerable amount of code in the process of conducting <a href="/research/">research</a> and completing <a href="http://pages.physics.cornell.edu/~cmuhlberger/research.php">academic assignments</a>, in addition to the projects I complete in my spare time.</p>
+  </div>
+</div>
+
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

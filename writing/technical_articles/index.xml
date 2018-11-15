@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technical articles on Curran D. Muhlberger</title>
+    <link>http://www.muhlbergerweb.com/writing/technical_articles/</link>
+    <description>Recent content in Technical articles on Curran D. Muhlberger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Jun 2018 23:45:00 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.muhlbergerweb.com/writing/technical_articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Integrating 3D controls to propagate desired state</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_articles/propagating_3d_controls/</link>
+      <pubDate>Sun, 03 Jun 2018 23:45:00 -0700</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_articles/propagating_3d_controls/</guid>
+      <description>Suppose you have a sensor that integrates body rates and velocities and reports these measurements over arbitrary intervals. And let’s further suppose that it’s reasonable to assume that those body rates and velocities are constant during each interval. How should we propagate the position and attitude of this sensor?
+First, it’s fair to ask what real-life situations this could reflect. Constant body rates would apply to inertial motion with rotation about stable principal axes and could be integrated by a gyro.</description>
+    </item>
+    
+    <item>
+      <title>Polynomial fitting pitfalls</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_articles/polynomial_fitting_pitfalls/</link>
+      <pubDate>Sun, 29 Sep 2013 17:25:00 -0400</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_articles/polynomial_fitting_pitfalls/</guid>
+      <description>A common task in research is to represent trends in a dataset by a smooth analytic function. If a physical model for the trend exists, then the goal is to fit for the parameters of the model. In other situations, however, no good model is available, so one tries instead to represent the trend with a general functional form or a basis function expansion. Polynomials are a popular choice, partially thanks to their general familiarity and their role in Taylor series.</description>
+    </item>
+    
+    <item>
+      <title>Objects vs. actors</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_articles/objects_vs_actors/</link>
+      <pubDate>Mon, 12 Aug 2013 00:39:49 -0400</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_articles/objects_vs_actors/</guid>
+      <description>Reactive programming is all the rage these days, and it brings with it a suite of new abstractions and paradigms. The Scala language provides a fantastic environment for deploying these new reactive techniques, bridging the gap between functional and object-oriented programming and enabling clean interfaces for tools like futures and actors. While the Internet is already full of information and tutorials about these concepts, I thought a simple comparison of some of the core abstractions might help clarify things in a learner’s mind.</description>
+    </item>
+    
+  </channel>
+</rss>

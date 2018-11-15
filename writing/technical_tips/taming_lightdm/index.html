@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Taming LightDM · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Taming LightDM <small><time datetime="2012-11-30T12:00:00-05:00">November 30, 2012</time></small></h1>
+        <p class="lead">Living with Ubuntu</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p>Ubuntu 12.04 LTS (the Precise Pangolin) uses LightDM as its display manager.  While attractive out-of-the-box, it continues the recent trend in display managers of offering far less functionality than we had 5 years ago.  Simple settings, like “please don’t let strangers use my computer,” are lacking from its interface.  Fortunately, there are some low-level controls that help make LightDM a little more bearable.</p>
+    <h3>Guest users</h3>
+    <p>There’s no doubt that guest sessions can be convenient in many circumstances, but there are plenty of others in which unauthorized users should not be allowed to access a given piece of hardware.  To disable LightDM’s guest session, edit the file <code>/etc/lightdm/lightdm.conf</code> and add the line <code>allow-guest=false</code>.</p>
+    <h3>Boot sound</h3>
+    <p>By default, when LightDM starts (including at first boot), it plays a drum sound at whatever volume the last user had their audio set to.  In a working environment, it’d be nice to be able to turn on our computer without bringing so much attention to ourselves.  Unlike guest sessions, however, the “ready sound” is not controlled by a configuration file.  Rather, the setting is stored in dconf for the “lightdm” user.  To disable the ready sound, execute the following commands:</p>
+<pre>sudo xhost +SI:localuser:lightdm
+sudo -u lightdm gsettings set com.canonical.unity-greeter play-ready-sound false</pre>
+    <p>The first command is necessary because the gsettings “set” command needs to talk to the X server.  No, I don’t know why either…</p>
+    <h3>Closing remarks</h3>
+    <p>Even with these tweaks, LightDM is still not appropriate for an enterprise environment (does anyone else see a privacy problem with showing every user’s wallpaper to any passer-by?), but hopefully the login experience is now a bit less unpleasant with these two issues under control.</p>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

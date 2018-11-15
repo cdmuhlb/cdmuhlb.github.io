@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X11 input configs · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>X11 input configs <small><time datetime="2017-04-22T01:45:00-07:00">April 22, 2017</time></small></h1>
+        <p class="lead">Sane settings for less common input devices</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p>Sometimes you plug a new peripheral into your Linux machine and it fails to “just work.”  And all too often, even with Google’s assistance, the fix is difficult to find (if a satisfactory solution can be found at all).  Here I’m documenting the settings I’ve found for a few input devices that don’t quite work out-of-the-box.</p>
+    <h3>Configuration overview</h3>
+    <p>Configs for X11 on Linux have moved around a lot over the years.  Nowadays, settings can either go in <code>.conf</code> files under <code>xorg.conf.d/</code> directories or in <code>xorg.conf</code> files, and these can live in several locations, including <code>/etc/X11</code> and <code>/usr/share/X11</code> (<code>man xorg.conf</code> for details).  The preferred way to introduce custom settings is <code>.conf</code> files under <code>/etc/X11/xorg.conf.d/</code>.</p>
+    <h3>Marble Mouse</h3>
+    <p>The <a href="https://www.logitech.com/en-us/product/trackman-marble-business">Logitech Trackman Marble</a> (aka Marble Mouse) is an affordable trackball that’s great for reducing space requirements and wrist usage.  The scroll buttons don’t last more than a few years, and the bearings need regular cleaning, but it remains my preferred pointing device.  Custom configuration is required to get ball-based scrolling and middle-click emulation.  Fortunately, the options are well-documented on the <a href="https://wiki.archlinux.org/index.php/Logitech_Marble_Mouse">ArchWiki</a>.</p>
+    <p>Add the following to <code>/etc/X11/xorg.conf.d/MarbleMouse.conf</code> (or other X11 config location of your choice):</p>
+<pre>
+Section "InputClass"
+&#x20;       Identifier  "Marble Mouse"
+&#x20;       MatchProduct "Logitech USB Trackball"
+&#x20;       Option "EmulateWheel" "true"
+&#x20;       Option "EmulateWheelButton" "8"
+&#x20;       Option "XAxisMapping" "6 7"
+&#x20;       Option "Emulate3Buttons" "true"
+&#x20;       # TODO: Don't map scroll button to back button
+EndSection
+</pre>
+    <p>Note that Gnome 3 will need an additional gsettings config to allow middle-click emulation.  Also, note that this enables horizontal as well as vertical scrolling, and some versions of the JVM register side scrolls as right clicks, though that problem appears to have been resolved for a few years now.  Finally, I think there is an option to unmap the right scroll button from the back button, which will save you headaches when the button inevitably becomes flaky a few years down the line.</p>
+    <h3>LifeChat headset</h3>
+    <p>The Microsoft LifeChat LX-6000 is one of <a href="http://thewirecutter.com/reviews/best-usb-office-headset/">The Wirecutter’s</a> top choices for USB headset.  However, on Linux, it can exhibit some strange behavior, such as holding down your mouse button when its mute button is pressed.  The key is to tell X11 to not treat it as an input device; it is an audio device, after all, and the mute and volume buttons actually function independently of any OS driver, so interpreting them as input sources is just asking for trouble.</p>
+    <p>To restore sanity, add the following to <code>/etc/X11/xorg.conf.d/LifeChat.conf</code> (or another X11 config location of your choosing):</p>
+<pre>
+Section "InputClass"
+&#x20;       Identifier "LifeChat"
+&#x20;       MatchProduct "Microsoft LifeChat LX-6000"
+&#x20;       Option "Ignore" "true"
+EndSection
+</pre>
+    <h3>SpaceMouse</h3>
+    <p>The <a href="http://www.3dconnexion.com/products/spacemouse/spacenavigator.html">SpaceNavigator</a> is a 3D mouse that gives you 6-degree-of-freedom input control (equivalent to 6 analog axes of joystick control).  Often found in engineering offices for doing CAD work, it is ideal for interacting with 3D modeling applications like <a href="https://www.blender.org/">Blender</a> and can even be used with the <a href="https://w3c.github.io/gamepad/">Gamepad API</a> in some web browsers on some platforms (Google Chrome on Windows, for example).</p>
+    <p>3Dconnexion provides x86 Linux drivers, but there is also the open-source <a href="http://spacenav.sourceforge.net/">spacenavd</a> that provides an alternate interface in addition to reimplementing the proprietary one.</p>
+    <p>TODO: Anything special here?  Issues starting daemon with desktop environment?</p>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

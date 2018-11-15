@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terminal tips · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Terminal tips <small><time datetime="2017-04-21T23:55:00-07:00">April 21, 2017</time></small></h1>
+        <p class="lead">Useful configs for bash and Vim</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p>A command-line terminal can be great for productivity.  But while sticking with defaults may keep you portable, customized settings (along with practice of advanced features) are really the keys to improved comfort and efficiency.  These are a few that I find especially useful.</p>
+    <h3>Environment variables</h3>
+    <p>Many pieces of software actually respect some useful shell environment variables.  The most significant one on modern systems is <code>EDITOR</code>, which should of course be reset to <code>/usr/bin/vim</code>.  On older systems, you may also want to set <code>PAGER</code> to <code>/usr/bin/less</code>, as the classic <code>more</code> pager just doesn’t live up to modern expectations.</p>
+    <h3>Vim behavior</h3>
+    <p>Vim’s default settings vary considerably by Linux distribution and release, and many are very much personal preference.  My own rather minimal config on Ubuntu 16.04 sets <code>incsearch</code>, <code>hlsearch</code>, and <code>showcmd</code>, which, when combined with that OS’s defaults, yields an environment similar to the Gentoo one I learned on.</p>
+    <p>But one objective improvement that has eluded me until recently is a fix for the long pause sometimes encountered after typing <kbd><kbd>shift</kbd> + <kbd>O</kbd></kbd> to insert a new line above the current one in command mode.  It turns out that, when typed shortly after <kbd>Esc</kbd> (to enter command mode), this is indistinguishable from entering an escape sequence.  Vim uses a timeout to try to separate such sequences from manual input, but, presumably for robustness over low-bandwidth links, the default timeout is quite long.  The solution is to reduce it with the following line in your <code>~/.bashrc</code>:</p>
+<pre>
+" We're not manually typing escape sequences, so don't stall after, e.g. Esc O
+set ttimeoutlen=10
+</pre>
+    <p>Using a short but non-zero value should prevent issues should a real escape sequence be split into different packets in a network protocol (this risk may be hypothetical, but I experienced no issues over a cross-country SSH link).</p>
+    <p>One Vim setting I am still searching for is to allow pasting without auto-indentation when <code>autoindent</code> is enabled (and without having to explicitly enter and exit <code>paste</code> mode).  Many suggested solutions for middle-click pastes rely on Vim being mouse-aware, but I prefer to operate it in a pure terminal mode.  I remember RHEL 5 having my preferred behavior by default, but I don’t know what combination of configs and compile options achieved it.</p>
+    <h3>Commands and aliases</h3>
+    <p>Among the most common command-line activities are searching for files based on filename and contents.  Such tools are of course provided out-of-the-box (<code>find</code>, <code>grep</code>), but invoking them with commonly useful settings can be needlessly verbose.  My recommended solutions are the following:</p>
+    <p>For searching for filenames, I use an alias (technically, a bash function) to do a case-insensitive search from the current directory for the argument anywhere in the filename.  I can imagine improvements, such as searching for multiple unordered substrings (a feature in many IDEs) or ignoring files not managed by the governing RCS, but <code>fnd</code> meets my needs in 90% of cases and is much faster to type than its expansion.</p>
+<pre>
+fnd() {
+&#x20;   find . -iname \*$1\*
+}
+</pre>
+    <p>When it comes to searching by contents, as good as <code>grep</code> is, I prefer <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> (<code>rg</code>).  It is recursive by default, knows which files to ignore when within an RCS, and is very fast on a wide variety of file types and search strings.  It’s not quite as snappy as <code>git grep</code> with a Git repo (it doesn’t just use the repository index to enumerate files), but it’s fantastic in so many other ways (its <a href="http://blog.burntsushi.net/ripgrep/">benchmark page</a> is really worth a read).  If you’re set up for <a href="https://www.rust-lang.org/en-US/install.html">Rust</a> development, installation is as easy as:</p>
+<pre>
+cargo install ripgrep
+</pre>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

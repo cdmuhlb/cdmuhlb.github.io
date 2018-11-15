@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software on Curran D. Muhlberger</title>
+    <link>http://www.muhlbergerweb.com/software/</link>
+    <description>Recent content in Software on Curran D. Muhlberger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://www.muhlbergerweb.com/software/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Projects</title>
+      <link>http://www.muhlbergerweb.com/software/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/software/projects/</guid>
+      <description>First employment 2014–present   Navball three.js KSP-style navball visualization of vehicle attitude and reference indicators.
+  data_sampler Rust Utility program for aggregating multi-channel data using a monotonic index channel, allowing them to be efficiently plotted without subsampling errors. Based on a previous version in JavaScript, but implemented with array-backed trees.
+  AssembleFramesCxx C++ A high-performance rewrite of AssembleFrames featuring cache-aware Lanczos-2 chroma decimation and Chebyshev-approximated transfer function translation.</description>
+    </item>
+    
+  </channel>
+</rss>

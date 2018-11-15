@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li class="active"><a href="/software/">Software</a></li>
+
+        <li><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Projects</h1>
+        <p class="lead">My enumerated programming experience.</p>
+
+<p>Here is a fairly complete catalog of programming, database, and web design projects I have undertaken over the years.  They include personal projects, coursework, and volunteer development.  The scale ranges from small scripts to production applications.  Projects are listed in roughly chronological order, with the most recent appearing first.</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>First employment <small>2014–present</small></h2>
+    <ul>
+      <li>
+	<h4>Navball <small>three.js</small></h4>
+	<p>KSP-style navball visualization of vehicle attitude and reference indicators.</p>
+      </li>
+      <li>
+	<h4>data_sampler <small>Rust</small></h4>
+	<p>Utility program for aggregating multi-channel data using a monotonic index channel, allowing them to be efficiently plotted without subsampling errors.  Based on a previous version in JavaScript, but implemented with array-backed trees.</p>
+      </li>
+      <li>
+	<h4>AssembleFramesCxx <small>C++</small></h4>
+	<p>A high-performance rewrite of <i>AssembleFrames</i> featuring cache-aware Lanczos-2 chroma decimation and Chebyshev-approximated transfer function translation.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/pvd2abc">pvd2abc</a> <small>C++</small></h4>
+	<p>Convert VTK data from a ParaView animation to the Alembic format for importing into visual effects pipelines.  Used to provide data to Double Negative for <a href="http://observer.com/2016/04/warped-side-of-the-universe-a-night-with-the-masterminds-behind-interstellar/"><i>Warped Side of the Universe</i></a>.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/McuBlink">McuBlink</a> <small>C++, Makefile</small></h4>
+	<p>Example applications and makefiles for various microcontroller boards, demonstrating how to program "blink" in raw C++.</p>
+      </li>
+      <li>
+	<h4>MusicUi <small>Scala, Akka HTTP, D3.js</small></h4>
+	<p>Web interface for browsing a music library and controlling music playback through a "raw" ALSA device, ensuring lossless transmission of audio data from file to DAC.</p>
+      </li>
+      <li>
+	<h4>PlotServer <small>Scala, Akka streams, Play, Polymer, D3.js, Websockets</small></h4>
+	<p>A stream-based, caching time-series data server with a hierarchy of aggregation levels, and a web frontend for browsing, plotting, and interacting with channels.</p>
+      </li>
+      <li>
+	<h4>stock-explorer <small>JavaScript, D3.js</small></h4>
+	<p>Multi-channel interactive data analysis interface in which selections are highlighted across all plot types.  Demoed using stock market share price data.</p>
+      </li>
+      <li>
+	<h4><a href="http://bl.ocks.org/cdmuhlb">Bayesian Blocks visualizations</a> <small>D3.js</small></h4>
+	<p>A visual explanation of thhe Bayesian Blocks algorithm, and an application of Bayesian Blocks to kernel density estimation.</p>
+      </li>
+      <li>
+	<h4>PhotoLuts and FujiRafWriter <small>Scala, RAF, dcpTool</small></h4>
+	<p>An attempt to infer Fujifilm's color look-up tables by synthesizing images that smoothly sample the majority of the camera's RGB colorspace, analyzing the resulting Lightroom-processed colors with and without camera profiles, and generating DNG profiles for non-Fuji cameras.</p>
+      </li>
+      <li>
+	<h4>SpaceNavTest <small>C++, CUDA, OpenGL, GLFW</small></h4>
+	<p>3D visualizer in which a vehicle can be manipulated in 6-DOF using a gamepad, an RC controller, or a SpaceMouse; written using “modern” OpenGL.</p>
+      </li>
+      <li>
+	<h4>GlfwImage <small>C++, CUDA, OpenGL, GLFW</small></h4>
+	<p>Interactive, GPU-accelerated local Laplacian filtering.</p>
+      </li>
+      <li>
+	<h4>Web-based telemetry client <small>Scala, Akka, Play, WebSockets, Bootstrap, CoffeeScript</small></h4>
+	<p>Browse, monitor, and plot live telemetry.</p>
+      </li>
+      <li>
+	<h4>Arduino projects <small>AVR C++</small></h4>
+	<ul>
+	  <li>BLDC motor driver</li>
+	  <li>PWM RC receiver to USB joystick adapter</li>
+	  <li>Perceptually uniform light dimmer</li>
+	</ul>
+      </li>
+      <li>
+	<h4>Raspberry Pi projects <small>Scala, Akka, JNI</small></h4>
+	<p>Components towards the long-term goal of writing a tricopter flight controller based on actors.</p>
+	<ul>
+	  <li>IMU, pressure sensor, and GPS drivers</li>
+	  <li>I2C Java interface (unfortunately, Oracle’s Device I/O project performs terribly and is full of bugs)</li>
+	</ul>
+      </li>
+      <li>
+	<h4>LFF-CPU <small>C++</small></h4>
+	<p>A CPU implementation of 1D local Laplacian pyramid signal analysis using either spatial-domain Lanczos decimation or frequency-domain spectrum partitioning via FFT.</p>
+      </li>
+      <li>
+	<h4>FC Gram <small>C++</small></h4>
+	<p>An implementation of Fourier Continuation.</p>
+      </li>
+      <li>
+	<h4>FV Explorer <small>Scala</small></h4>
+	<p>A 1D HRSC finite volume solver and plotter for Burgers’s equation.</p>
+      </li>
+      <li>
+	<h4>SpaceX simulation software <small>C++, Python, Modelica, Scala</small></h4>
+	<p>Dynamics, subsystem, and sensor/actuator simulators for analyzing and testing rockets and spacecraft.</p>
+      </li>
+      <li>
+	<h4>SpaceX software candidate test <small>C++</small></h4>
+	<p>No, I won't tell you what it is.</p>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <h2>Graduate school <small>2008–2014</small></h2>
+    <ul>
+      <li>
+	<h4><a href="http://lensplotter.muhlbergerweb.com/">LensPlotter</a> <small>Scala, Play, Bootstrap, SVG</small></h4>
+	<p>My gold-medal entry into the LensRentals.com <a href="https://www.lensrentals.com/blog/2014/06/geeks-go-wild-data-processing-contest-suggestions/">data processing contest</a>.</p>
+      </li>
+      <li>
+	<h4><a href="http://astro.cornell.edu/nsfrontiers/"><i>Frontiers of Neutron Star Astrophysics</i> website</a> <small>PHP, Bootstrap, MySQL</small></h4>
+	<p>Design of website and online registration and payment system for an astrophysics conference hosted at Cornell.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/MshExplorer">MshExplorer</a> <small>Scala, JavaFX</small></h4>
+	<p>Design perceptually uniform colormaps with arbitrary hue ranges for use in scientific visualization.  Resulting maps can be used in <a href="https://github.com/cdmuhlb/DgView">DgView</a> or exported to <a href="http://www.gnuplot.info/">Gnuplot</a> and <a href="http://paraview.org/">ParaView</a>.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/AssembleFrames">AssembleFrames</a> <small>Java</small></h4>
+	<p>Assemble a sequence of image files into an H.264 video (encoded with x264) via an intermediate YCbCr 4:2:0 stream.  The original colors should be accurately reproduced by a standards-complianat playback system.</p>
+      </li>
+      <li>
+	<h4>Coursera “reactive” coursework <small>Scala, Akka</small></h4>
+	<p>Unit projects for <a href="https://www.coursera.org/course/reactive">Principles of Reactive Programming</a>, including a replicated key-value store.</p>
+      </li>
+      <li>
+	<h4><a href="http://pages.physics.cornell.edu/~cmuhlberger/color-checker/">sRGB ColorChecker</a> <small>HTML, Bootstrap</small></h4>
+	<p>Page to test browsers’ support of color management for the sRGB colorspace (also tests sRGB and BT.709 support in H.264 video).</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/DgView">DgView</a> <small>Scala, Akka, Swing</small></h4>
+	<p>Visualizes data from spectral element meshes.  Parallel rendering is performed by actors, which interface with SwingWorker to update the UI.  Animations can be saved as both frame sequences and raw video.</p>
+      </li>
+      <li>
+	<h4>ScalaElements <small>Scala</small></h4>
+	<p>Library of spectral elements, including basis functions, cardinal functions, and quadrature nodes and weights.  It refactors some of the spectral math classes from <a href="https://github.com/cdmuhlb/DGenerate">DGenerate</a> and adds support for additional bases, including trigonometric functions and Zernike polynomials.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/ActorControl">ActorControl</a> <small>Scala, Akka</small></h4>
+	<p>A framework for sensors, actuators, controllers, and modelers integrated using actors.  Features a modern, high-level ODE integration package (in limbo, though the ODE integrator is fully functional).</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/TooMassFun">TooMassFun</a> <small>Scala, C, C++, CUDA, GSL</small></h4>
+	<p>Fit black-body temperatures to point source data from <a href="http://www.ipac.caltech.edu/2mass/">2MASS</a> and render images of the Milky Way.  See <a href="/writing/blog/coloring_the_galaxy/")">Coloring the galaxy</a>.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/AudioActors">AudioActors</a> <small>Scala, Akka</small></h4>
+	<p>Framework for actor-based real-time audio processing, originally written as scaffolding for controlling Hue lights with beat detection (in limbo; may be revisited when LIFX bulbs become available).</p>
+      </li>
+      <li>
+	<h4><a href="http://www.muhlbergerweb.com/">Personal website (Cornell v. 2)</a> <small>Scala, Play, Bootstrap, PostgreSQL</small></h4>
+	<p>The website you are currently visiting.  Enjoy!</p>
+      </li>
+      <li>
+	<h4>HydroFFT <small>C++, Thrust, cuFFT</small></h4>
+	<p>A basic algorithm for interpolating 3D Cartesian power spectra to cylindrical coordinates on the GPU using parallel primitives from <a href="http://thrust.github.io/">Thrust</a>.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/DGenerate">DGenerate</a>, aka ScalaSpEC <small>Scala, Akka, Breeze</small></h4>
+	<p>A parallel Discontinuous Galerkin solver implemented using actors.  Designed to explore the suitability of high-level languages and communication architectures for high-performance computing and to test the scalability of Akka clustering and remote actors.  Designed to accommodate heterogeneous computing (by having one actor in a routing pool manage a GPU, for example).</p>
+      </li>
+      <li>
+	<h4>Coursera “progfun” coursework <small>Scala</small></h4>
+	<p>Unit projects for <a href="https://www.coursera.org/course/progfun">Functional Programming Principles in Scala</a>.</p>
+      </li>
+      <li>
+	<h4>WebPlotter <small>Scala, Play, LESS</small></h4>
+	<p>Plot diagnostics of numerical relativity simulations with a web interface that allows breaking up summary plots into individual plots.</p>
+      </li>
+      <li>
+	<h4>SXS GWDB <small>Scala, Play, LESS, SQL</small></h4>
+	<p>Prototype web interface for a public database of gravitational waveforms produced by the <a href="http://www.black-holes.org/">SXS</a> collaboration.</p>
+      </li>
+      <li>
+	<h4>VtkVtiGen <small>Scala</small></h4>
+	<p>Convert <a href="http://www.vtk.org/">VTK</a> “structured grid” datasets to “parallel image” datasets for more efficient IO and access to better volume rendering options in <a href="http://www.paraview.org/">ParaView</a>.</p>
+      </li>
+      <li>
+	<h4>Mastermind solver <small>Scala</small></h4>
+	<p>Solve a game of Mastermind with an arbitrary number of pegs and colors in the fewest number of guesses.  Facilitate implementation and evaluation of alternate algorithms based on entropy measurements of the solution space.</p>
+      </li>
+      <li>
+	<h4>PowerSpectrumEstimator 2 <small>C++, FFTW</small></h4>
+	<p>Computes FFT periodograms “done right”, incorporating advice from <i>Numerical Recipes</i> and <a href="http://hdl.handle.net/11858/00-001M-0000-0013-5579-7">Spectrum and spectral density estimation by the Discrete Fourier Transform (DFT), including a comprehensive list of window functions and some new flat-top windows</a>.</p>
+      </li>
+      <li>
+	<h4>StereoZoom <small>Scala</small></h4>
+	<p>Simulate stereo recording for arbitrary microphone locations, orientations, polar patterns, and mixes.  Captures both amplitude and phase differences and models the Doppler effect for moving sources.</p>
+      </li>
+      <li>
+	<h4><a href="https://github.com/cdmuhlb/FloatingPyramids">FloatingPyramids</a> <small>C++, CUDA</small></h4>
+	<p>Tool for performing dynamic range compression on images using Laplacian pyramids.  Implements algorithms described in the papers <a href="http://people.csail.mit.edu/sparis/publi/2011/siggraph/">Local Laplacian Filters: Edge-aware Image Processing with a Laplacian Pyramid</a> and <a href="http://dspace.mit.edu/handle/1721.1/67030">Fast and Robust Pyramid-based Image Processing</a>.</p>
+      </li>
+      <li>
+	<h4>Udacity CS344 coursework <small>C++, CUDA</small></h4>
+	<p>Unit projects for <a href="https://www.udacity.com/course/cs344">Introduction to Parallel Programming</a>, including a high-performance convolution routine and a Poisson equation solver.</p>
+      </li>
+      <li>
+	<h4><a href="http://www.eyh.cornell.edu/">EYH website</a> <small>PHP, CSS, MySQL, Perl</small></h4>
+	<p>Re-design and maintenance of Cornell’s Expanding Your Horizons website and online registration system.</p>
+      </li>
+      <li>
+	<h4>Spectral diffusion solver <small>C++, LAPACK, BLAS</small></h4>
+	<p>Project for CEE 6300: Spectral methods for incompressible environmental flows.  Solve the diffusion equation in 1D using spectral methods with a variety of timesteppers (both implicit and explicit).  Also compute eigenvalues for a given stepping scheme.</p>
+      </li>
+      <li>
+	<h4><a href="http://energyandsustainability.fs.cornell.edu/lightsoff/index.cfm">Lights Off Cornell</a> backend <small>ColdFusion, Oracle SQL</small></h4>
+	<p>Assisted Jolyon Bloomfield with the initial design and implementation of the registration and scheduling system for a campus program providing service opportunities in turning off unused lights at night across campus.</p>
+      </li>
+      <li>
+	<h4>Fitting IMF models with MESA simulations <small>C</small></h4>
+	<p>Infer probability distribution for stellar observations from discrete evolutionary tracks, for use in Bayesian analysis of initial mass function models.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/astro6560-paper.pdf">Astronomy 6560 project report</a>.</p>
+      </li>
+      <li>
+	<h4>Battleship AI and tournament protocol handler <small>X10</small></h4>
+	<p>Play multiple games of Battleship using a tournament protocol that would allow strategies to adapt given knowledge from previous games.  Protocol is modeled as a finite state machine designed to be resilient to failure or unexpected messages.</p>
+      </li>
+      <li>
+	<h4>Zernike polynomial spectral element <small>C, FFTW, BLAS</small></h4>
+	<p>High-performance implementation of a spectral element for the unit disk, including spectral transforms, interpolation, differentiation, and integration.  Used to validate implementations in SpEC and to guide the development of a spectral element for the unit sphere.</p>
+      </li>
+      <li>
+	<h4>Ising model solver <small>C</small></h4>
+	<p>A high-performance MCMC solver for the Ising model, written for a project in Physics 6562: Statistical Physics I.</p>
+      </li>
+      <li>
+	<h4>PGS website <small>PHP, CSS</small></h4>
+	<p>Redesign and maintenance of Cornell’s <a href="http://pages.physics.cornell.edu/pgs/">Physics Graduate Society</a> website.</p>
+      </li>
+      <li>
+	<h4><a href="http://www.black-holes.org/SpEC.html">SpEC</a> <small>C++, MPI, PETSc, FFTW, BLAS</small></h4>
+	<p>Numerous contributions to the Spectral Einstein Code, including:</p>
+	<ul>
+	  <li>Finite volume solver for GRMHD using upwind constrained transport (paper in preparation)</li>
+	  <li>Protocol for maintaining a shared cache file used by independent processes and an implementation of a file-backed mutex class that functions on distributed network filesystems.</li>
+	  <li>Reconstruction and interpolation framework for finite difference grids with excision based on 1D stripe kernels</li>
+	  <li>Experimental communication optimization based on asynchronous MPI</li>
+	  <li>Optimization of FFT-based spectral elements</li>
+	  <li>Implementation of basis functions for B<sup>2</sup> and B<sup>3</sup> topologies using Zernike polynomials (see <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/accgr-poster.pdf">poster</a>)</li>
+	  <li>Initial data solver for binary neutron star systems, based on existing code for black hole–neutron star systems</li>
+	</ul>
+      </li>
+      <li>
+	<h4>TOVSolverC <small>C, GSL</small></h4>
+	<p>Solve for neutron stars possessing a specific property given an equation-of-state, or solve for stars possessing two properties while fixing a polytropic equation-of-state.</p>
+      </li>
+      <li>
+	<h4>Spectral elliptic solver <small>C, PLplot</small></h4>
+	<p>Solve a 1D elliptic equation using pseudospectral methods and plot the solution.</p>
+      </li>
+      <li>
+	<h4>TOV solver <small>Python</small></h4>
+	<p>Final project for Physics 7684: Computational methods for nonlinear systems.  Compute and plot the mass-radius relation for neutron stars given tabulated equations-of-state (which are interpolated using cubic splines).  Other course projects include code for performing network analysis, exploring scaling laws, and rendering bifurcation diagrams.</p>
+      </li>
+      <li>
+	<h4>Physics 7682 coursework <small>Python</small></h4>
+	<p>Projects for <a href="http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/">Computational Method for Nonlinear Systems</a> exploring networks, percolation, iterated maps, and more.</p>
+      </li>
+      <li>
+	<h4>My brother’s website <small>HTML, CSS</small></h4>
+	<p>Personal website for my brother, <a href="http://www.patjm.com/">Patrick Muhlberger</a>.</p>
+      </li>
+      <li>
+	<h4><i>Trailerpark</i> movie website <small>HTML, CSS</small></h4>
+	<p>Implemented website designs for the feature-length student production <a href="http://www.ohio.edu/mediaschool/trailerparkmovie/"><i>Trailerpark</i></a>, enforcing standards compliance while also ensuring broad browser compatibility.</p>
+      </li>
+      <li>
+	<h4><a href="http://pages.physics.cornell.edu/~cmuhlberger/">Personal website (Cornell v. 1)</a> <small>PHP, CSS</small></h4>
+	<p>New website hosted at Cornell’s Physics Educational Computing Facility.</p>
+      </li>
+      <li>
+	<h4>NR3 RNGs for GSL <small>C</small></h4>
+	<p>Implementations of the random number generators introduced in <i>Numerical Recipes 3</i> that can be plugged into <a href="http://www.gnu.org/software/gsl/">GSL</a>’s RNG framework.</p>
+      </li>
+      <li>
+	<h4>Inverted pendulum control simulator <small>Java, Swing</small></h4>
+	<p>Animate the dynamics of an inverted pendulum governed by a tunable control system (discrete or continuous).  Perturbations could be applied by clicking with the mouse.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>College <small>2004–2008</small></h2>
+    <ul>
+      <li>
+	<h4>IOTL/ATS command checker <small>Java</small></h4>
+	<p>Compare instrument command requests (ATS format) for the <a href="http://gammaray.nsstc.nasa.gov/gbm/">gamma-ray burst monitor</a> with the final satellite command schedule (IOTL format) for Fermi (formerly GLAST) received from Goddard, ensures that the commands match, and checks that maintenance tasks are scheduled during South Atlantic Anomaly crossings.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/muhlbcd-paper.pdf">NASA Academy report</a>.</p>
+      </li>
+      <li>
+	<h4>GBM database viewer <small>Perl, SQL, HTML, CSS</small></h4>
+	<p>Provide an internal web-accessible view of <a href="http://gammaray.nsstc.nasa.gov/gbm/">GBM</a> pipeline databases.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/muhlbcd-paper.pdf">NASA Academy report</a>.</p>
+      </li>
+      <li>
+	<h4>IPN burst report generator <small>C</small></h4>
+	<p>Generate burst reports for the <a href="http://www.ssl.berkeley.edu/ipn3/">Interplanetary Network</a> from <a href="http://gammaray.nsstc.nasa.gov/gbm/">GBM</a> data, summing the optimal subset of detectors to maximize the signal-to-noise ratio of the final lightcurve.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/muhlbcd-paper.pdf">NASA Academy report</a>.</p>
+      </li>
+      <li>
+	<h4>GBM data self-consistency checker <small>C</small></h4>
+	<p>Compare CTIME, CSPEC, and TTE data from the Fermi (formerly GLAST) <a href="http://gammaray.nsstc.nasa.gov/gbm/">gamma-ray burst monitor</a> and check them for self-consistency.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/muhlbcd-paper.pdf">NASA Academy report</a>.</p>
+      </li>
+      <li>
+	<h4>PowerSpectrumEstimator <small>C, FFTW</small></h4>
+	<p>Computes FFT periodograms “done right”, incorporating advice from <i>Numerical Recipes</i>.  Used for analyzing <a href="http://janus.astro.umd.edu/HNBody/">HNBody</a> data in the context of trying to explain Pluto’s high inclination via orbital resonances (see <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/astr399-paper.pdf">research paper</a>).</p>
+      </li>
+      <li>
+	<h4><a href="http://janus.astro.umd.edu/astro/scinote/">Scientific notation practice</a> <small>Perl, HTML, CSS</small></h4>
+	<p>Refresh the most popular component of the <a href="http://janus.astro.umd.edu/">Astronomy Workshop</a>.</p>
+      </li>
+      <li>
+	<h4>Gamma-gamma angular correlation Monte Carlo simulator <small>Java</small></h4>
+	<p>Parallel simulator to compute detector cross sections for different detector geometries.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/phys405-paper.pdf">Physics 405 project report</a>.</p>
+      </li>
+      <li>
+	<h4>Linguistic entropy estimator <small>Java, Swing</small></h4>
+	<p>Estimate the entropy per character (in bits) of a language by having a participant guess the content of a passage of text letter-by-letter.</p>
+      </li>
+      <li>
+	<h4>Octree implementation <small>Java</small></h4>
+	<p>A from-scratch implementation of an octree data structure, intended to facilitate development of a Barnes–Hut <i>N</i>-body integrator.</p>
+      </li>
+      <li>
+	<h4>Clock plot Swing component <small>Java, Swing</small></h4>
+	<p>Swing component for rendering “clock plots”.  Useful for visualizing weekly schedules, these plots show time on the azimuthal axis and day-of-week on the radial axis.</p>
+      </li>
+      <li>
+	<h4>⟨redacted⟩ <small>x86 assembly, C</small></h4>
+	<p>Yes, I’m enigmatic like that…</p>
+      </li>
+      <li>
+	<h4>Headline puzzle tools <small>Java</small></h4>
+	<p>A collection of tools to assist in solving the <a href="http://www.thephoenixsociety.org/puzzles/puzzles.htm">headline puzzle</a>.</p>
+      </li>
+      <li>
+	<h4>Personal website (UMD) <small>HTML, CSS</small></h4>
+      </li>
+      <li>
+	<h4><i>N</i>-body integrator <small>Java</small></h4>
+	<p>See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/astr415-homework6-report.pdf">Astronomy 415 project report #6</a>.  Additional coursework for Computational Astrophysics is described on my <a href="http://pages.physics.cornell.edu/~cmuhlberger/research.php">old <i>Research</i> page</a>.</p>
+      </li>
+      <li>
+	<h4>Finite element method for Laplace’s equation <small>MATLAB, misc. GIS tools</small></h4>
+	<p>Implementation of a basic finite element solver for use with geopolitical boundary conditions and source terms.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/phys411-project-report.pdf">Physics 411 project report</a>.</p>
+      </li>
+      <li>
+	<h4>UMD observatory website contest <small>HTML, CSS</small></h4>
+	<p>Co-winning entry for a redesign of the <a href="http://www.astro.umd.edu/openhouse/">UMD Observatory</a> website.</p>
+      </li>
+      <li>
+	<h4>Astroterps website <small>HTML, CSS</small></h4>
+	<p>Redesign and maintenance of the <a href="http://www.astro.umd.edu/~astroterp/">Terrapin Astronomical Society</a> website.</p>
+      </li>
+      <li>
+	<h4>ShiftShaper <small>Java, JSP, CSS, MySQL</small></h4>
+	<p>Web application allowing <a href="http://www.umiacs.umd.edu/">UMIACS</a> Help Desk employees to choose shifts and to ensure that all shifts are adequately covered and supervised.</p>
+      </li>
+      <li>
+	<h4>UMIACS directory search <small>Java, JSP, CSS, LDAP</small></h4>
+	<p>Perform multi-field searches on the <a href="http://www.umiacs.umd.edu/">UMIACS</a> LDAP directory and return results as graphical address book cards.</p>
+      </li>
+      <li>
+	<h4>Quiz Bowl web scheduler <small>Java, HTML, CSS</small></h4>
+	<p>Generate round-robin schedules for quiz bowl tournaments.</p>
+      </li>
+      <li>
+	<h4>PrinceGeorges.org map and timeline <small>HTML, CSS, Javascript, MapServer</small></h4>
+	<p>Allow navigating websites for community research projects on PrinceGeorges.org both geographically and chronologically.</p>
+      </li>
+      <li>
+	<h4>Blog and mission site for Goddard’s College Freshman Intern Program <small>HTML, CSS</small></h4>
+	<p>Served as both community outreach for PrinceGeorges.org and as the outreach component of a mock Discovery-class NASA mission to the Moon.</p>
+      </li>
+      <li>
+	<h4>Shock analysis extractor <small>Java</small></h4>
+	<p>Extract user-specified parameters from a shock analysis website and save them to a spreadsheet for use in existing workflows.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/phys299-report.pdf">Physics 299 semester report</a>.</p>
+      </li>
+      <li>
+	<h4>Upstream events finder <small>IDL</small></h4>
+	<p>Identify upstream events in WIND data and facilitate manual removal of false positives.  See <a href="http://pages.physics.cornell.edu/~cmuhlberger/documents/phys299-report.pdf">Physics 299 semester report</a>.</p>
+      </li>
+      <li>
+	<h4>Web scheduler <small>Java, HTML, CSS</small></h4>
+	<p>Render an attractive, color-coded HTML view of a student’s course schedule suitable for printing.</p>
+      </li>
+      <li>
+	<h4>STK model visualizer <small>Java, Java 3D</small></h4>
+	<p>Render 3D models of satellites and other defense assets by parsing the model format used by <a href="https://www.agi.com/">STK</a>.</p>
+      </li>
+      <li>
+	<h4>Skills Survey <small>JSP, CSS, MySQL</small></h4>
+	<p>Catalog employees’ skills.</p>
+      </li>
+      <li>
+	<h4>Map projector <small>Java</small></h4>
+	<p>Transform GPS coordinates to an arbitrary aerial perspective (fit from calibration points) to allow points of interest (in this case, Wi-Fi access points) to be plotted on an artistic version of the UMD campus map.</p>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <h2>High school <small>2000–2004</small></h2>
+    <ul>
+      <li>
+	<h4>Quiz Aid <small>Java, Swing</small></h4>
+	<p>Group project to develop a graphical flash card application that would keep track of user statistics (served as project leader).</p>
+      </li>
+      <li>
+	<h4>Xiang Qi <small>Java, Swing</small></h4>
+	<p>Pair project to develop a graphical implementation of Xiang Qi (Chinese Chess) with a basic single-player mode in addition to two-player support.</p>
+      </li>
+      <li>
+	<h4>Battleship AI <small>Java</small></h4>
+	<p>Artificial intelligence for the game Battleship (ranked first in class).</p>
+      </li>
+      <li>
+	<h4>Lego Mindstorms movement library <small>Java</small></h4>
+	<p>A set of calibratable routines for instructing a robot to move and turn in terms of physical units (like inches and degrees).</p>
+      </li>
+      <li>
+	<h4>⟨redacted⟩ <small>Java, Swing, HTML</small></h4>
+	<p>Yes, I’m enigmatic like that…</p>
+      </li>
+      <li>
+	<h4>Console Blackjack <small>Java</small></h4>
+	<p>A text-graphical Blackjack game rendered in the Windows Command Prompt using DOS box-drawing characters.</p>
+      </li>
+      <li>
+	<h4>CS2 coursework <small>Pascal</small></h4>
+      </li>
+      <li>
+	<h4>Personal website <small>HTML, Javascript</small></h4>
+	<p>One of my first websites, which included some entertaining interactive quizzes.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Childhood <small>pre-2000</small></h2>
+    <ul>
+      <li>
+	<h4>Anagram guessing game <small>QBASIC</small></h4>
+	<p>DOS game that asked questions, read in answers, and informed you whether you were right or wrong.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

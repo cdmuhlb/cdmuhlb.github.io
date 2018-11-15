@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'CC Icons';
+  src: url('../fonts/cc-icons.ttf') format('truetype');
+}
+.ccicon:before {
+  font-family: 'CC Icons';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.ccicon-cc:before { content: "c"; }
+.ccicon-by:before { content: "b"; }

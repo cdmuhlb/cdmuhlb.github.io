@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technical tips on Curran D. Muhlberger</title>
+    <link>http://www.muhlbergerweb.com/writing/technical_tips/</link>
+    <description>Recent content in Technical tips on Curran D. Muhlberger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Apr 2017 01:45:00 -0700</lastBuildDate>
+    
+	<atom:link href="http://www.muhlbergerweb.com/writing/technical_tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>X11 input configs</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_tips/x11_inputs/</link>
+      <pubDate>Sat, 22 Apr 2017 01:45:00 -0700</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_tips/x11_inputs/</guid>
+      <description>Sometimes you plug a new peripheral into your Linux machine and it fails to “just work.” And all too often, even with Google’s assistance, the fix is difficult to find (if a satisfactory solution can be found at all). Here I’m documenting the settings I’ve found for a few input devices that don’t quite work out-of-the-box.
+Configuration overview Configs for X11 on Linux have moved around a lot over the years.</description>
+    </item>
+    
+    <item>
+      <title>Terminal tips</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_tips/terminal_tips/</link>
+      <pubDate>Fri, 21 Apr 2017 23:55:00 -0700</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_tips/terminal_tips/</guid>
+      <description>A command-line terminal can be great for productivity. But while sticking with defaults may keep you portable, customized settings (along with practice of advanced features) are really the keys to improved comfort and efficiency. These are a few that I find especially useful.
+Environment variables Many pieces of software actually respect some useful shell environment variables. The most significant one on modern systems is EDITOR, which should of course be reset to /usr/bin/vim.</description>
+    </item>
+    
+    <item>
+      <title>Taming LightDM</title>
+      <link>http://www.muhlbergerweb.com/writing/technical_tips/taming_lightdm/</link>
+      <pubDate>Fri, 30 Nov 2012 12:00:00 -0500</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/technical_tips/taming_lightdm/</guid>
+      <description>Ubuntu 12.04 LTS (the Precise Pangolin) uses LightDM as its display manager. While attractive out-of-the-box, it continues the recent trend in display managers of offering far less functionality than we had 5 years ago. Simple settings, like “please don’t let strangers use my computer,” are lacking from its interface. Fortunately, there are some low-level controls that help make LightDM a little more bearable.
+Guest users There’s no doubt that guest sessions can be convenient in many circumstances, but there are plenty of others in which unauthorized users should not be allowed to access a given piece of hardware.</description>
+    </item>
+    
+  </channel>
+</rss>

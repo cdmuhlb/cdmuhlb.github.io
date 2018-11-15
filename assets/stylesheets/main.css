@@ -1,0 +1,41 @@
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Let the jumbotron breathe */
+  .jumbotron {
+    margin-top: 20px;
+  }
+}
+
+/* Navbar */
+.navbar {
+  margin-bottom: 0;
+}
+
+/* Index carousel */
+.index-carousel img {
+  min-width: 100%;
+}
+.index-carousel .carousel-caption {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: auto;
+  padding-top: 1em;
+}
+.index-carousel .carousel-caption .jumbotron {
+  padding: 1em;
+  background-color: rgba(34, 34, 34, 0.2);
+}
+.index-carousel .carousel-caption .jumbotron h1 {
+  margin: 0;
+}
+
+/* Footer */
+footer {
+  margin-bottom: 1em;
+}
+
+/* Don't break lines in code */
+pre code {
+  white-space: pre;
+}

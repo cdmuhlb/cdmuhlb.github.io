@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Curran D. Muhlberger</title>
+    <link>http://www.muhlbergerweb.com/writing/blog/</link>
+    <description>Recent content in Blog on Curran D. Muhlberger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Oct 2013 22:33:00 -0400</lastBuildDate>
+    
+	<atom:link href="http://www.muhlbergerweb.com/writing/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Coloring the galaxy</title>
+      <link>http://www.muhlbergerweb.com/writing/blog/coloring_the_galaxy/</link>
+      <pubDate>Sun, 20 Oct 2013 22:33:00 -0400</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/blog/coloring_the_galaxy/</guid>
+      <description>How does one take a picture of the Milky Way? With good technique and the right equipment you can do so with a camera, an opportunity I try not to miss when vacationing under the dark skies of the American West (see photo). But stray light and sensor noise limit the dynamic range achievable with this technique. Is there another approach? Well, if we knew where all the stars in the night sky were, we could render their light with any brightness, field-of-view, or PSF we wished.</description>
+    </item>
+    
+    <item>
+      <title>Surprise citations</title>
+      <link>http://www.muhlbergerweb.com/writing/blog/surprise_citations/</link>
+      <pubDate>Tue, 06 Aug 2013 03:55:40 -0400</pubDate>
+      
+      <guid>http://www.muhlbergerweb.com/writing/blog/surprise_citations/</guid>
+      <description>Once you post something to the Internet, it’s there for the world to find and do with as it sees fit. This often results in your work being referenced in contexts where it (in your opinion) really doesn’t belong. In particular, students and academic enthusiasts are often unable to discern expert research from amateur writeups, especially if the latter are well-typeset. Other times, though, you may be surprised at the reach and value of your old work.</description>
+    </item>
+    
+  </channel>
+</rss>

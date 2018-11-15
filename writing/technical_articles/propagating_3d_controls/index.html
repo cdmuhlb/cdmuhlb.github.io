@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Integrating 3D controls to propagate desired state · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Integrating 3D controls to propagate desired state <small><time datetime="2018-06-03T23:45:00-07:00">June 3, 2018</time></small></h1>
+        <p class="lead">Not-quite-inertial navigation</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-8">
+    <p>Suppose you have a sensor that integrates body rates and velocities and reports these measurements over arbitrary intervals.  And let’s further suppose that it’s reasonable to assume that those body rates and velocities are constant during each interval.  How should we propagate the position and attitude of this sensor?</p>
+    <p>First, it’s fair to ask what real-life situations this could reflect.  Constant body rates would apply to inertial motion with rotation about stable principal axes and could be integrated by a gyro.  But constant body velocities?  In two dimensions this assumption could apply to a vehicle driven by wheels or treads moving at a constant speed, and twice-integrated accelerator data would produce the desired signal, but in most situations it probably makes more sense to assume constant inertial velocity or perhaps constant body-frame acceleration.  Thus applicability seems questionable from a navigation point of view, but what about (pilot) control?  A 6-DOF hand controller or SpaceMouse provides exactly this kind of signal.</p>
+    <p>As an example, consider piloting a vehicle (or, more mundane, a camera view in a 3D application) and commanding a left translation simultaneously with a clockwise rotation.  You would expect the resulting motion to circle a fixed point at some distance in front of you.  This will be the test of our propagation scheme.</p>
+    <p>One approach would simply be to divide the measurements by the duration of the interval (recovering the rates and velocities), then numerically integrate them to advance the state.  But this integration can be done analytically, allowing the propagation to be performed in a single operation (with no need to choose between integrators, step sizes, etc.).  Integrating the rotation is straightforward: if <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>R</mi><mi>i</mi></msub></math> represents the initial attitude (world-to-body-frame quaternion, for example) and <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle></math> are the integrated body rates, then we simply rotate <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>R</mi><mi>i</mi></msub></math> by <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle></math>.  Expressed as quaternions,</p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>R</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>R</mi><mi>i</mi></msub><mo>⋅</mo><mrow><mo>(</mo><mrow><mo lspace="0em" rspace="0em">cos</mo><mo stretchy="false">(</mo><mi>θ</mi><mo>/</mo><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mo lspace="0em" rspace="0em">sin</mo><mo stretchy="false">(</mo><mi>θ</mi><mo>/</mo><mn>2</mn><mo stretchy="false">)</mo><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover></mrow><mo>)</mo></mrow></mrow></math>
+    <p>(here, <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>θ</mi><mo>=</mo><mo stretchy="false">‖</mo><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">‖</mo></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover><mo>=</mo><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo>/</mo><mi>θ</mi></mrow></math>).</p>
+    <p>For translation (by a body-integrated amount <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>x</mi></mrow></mstyle></math>), I don’t know of an elegant way to derive the result, but brute force gives us</p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub><mo>+</mo><msubsup><mi>R</mi><mi>i</mi><mrow><mo>-</mo><mn>1</mn></mrow></msubsup><mo>⋅</mo><mrow><mo>(</mo><mrow><mrow><mo>(</mo><mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover><mo>⋅</mo><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>x</mi></mrow></mstyle></mrow><mo>)</mo></mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover><mo>+</mo><mfrac><mrow><mo lspace="0em" rspace="0em">sin</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mi>θ</mi></mfrac><mrow><mo>(</mo><mrow><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>x</mi></mrow></mstyle><mo>-</mo><mrow><mo>(</mo><mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover><mo>⋅</mo><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>x</mi></mrow></mstyle></mrow><mo>)</mo></mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover></mrow><mo>)</mo></mrow><mo>+</mo><mfrac><mrow><mn>1</mn><mo>-</mo><mo lspace="0em" rspace="0em">cos</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mi>θ</mi></mfrac><mrow><mo>(</mo><mrow><mover><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>θ</mi></mrow></mstyle><mo stretchy="false">^</mo></mover><mo>×</mo><mstyle mathvariant="bold"><mrow><mi>Δ</mi><mi>x</mi></mrow></mstyle></mrow><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mrow></math>
+    <p>(here, <math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mi>R</mi><mi>i</mi><mrow><mo>-</mo><mn>1</mn></mrow></msubsup></math> is treated as a rotation operator, like a DCM, so this should not be interpreted as multiplying a quaternion by a promoted vector).</p>
+    <p>For practical implementation, there are a few numerical edge cases that need to be addressed.  Additionally, since this will be called for every measurement (125 Hz for a USB SpaceMouse, for example), we should take advantage of some related performance optimizations as well:</p>
+    <ol>
+      <li>Special-case the situation in which <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>θ</mi></math> is 0 (avoid numerical division by zero and optimize for the purely translational case)</li>
+      <li>Compute <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo lspace="0em" rspace="0em">sin</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>1</mn><mo>-</mo><mo lspace="0em" rspace="0em">cos</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></math> in terms of <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo lspace="0em" rspace="0em">sin</mo><mo stretchy="false">(</mo><mi>θ</mi><mo>/</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo lspace="0em" rspace="0em">cos</mo><mo stretchy="false">(</mo><mi>θ</mi><mo>/</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></math> via double-angle identities (avoid unnecessary trig calls and poor precision of <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>1</mn><mo>-</mo><mo lspace="0em" rspace="0em">cos</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></math> for small <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>θ</mi></math>)</li>
+    </ol>
+    <p>One could consider optimizing for the purely rotational case as well.  Also, be aware of any normalization requirements when using quaternion libraries (my personal view is that quaternions should be left unnormalized, with division by the norm taking place in any rotation operations, but that’s a subject for another article).  A production-ready version of this procedure might thus look like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Quaternionf</span><span class="o">&gt;</span>
+<span class="n">propagate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Quaternionf</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">r</span><span class="p">,</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">dx</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">dtheta</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="k">const</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">dtheta</span><span class="p">.</span><span class="n">stableNorm</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">dtheta_hat</span> <span class="o">=</span> <span class="n">dtheta</span><span class="o">/</span><span class="n">theta</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Quaternionf</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">AngleAxisf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dtheta_hat</span><span class="p">));</span>
+
+    <span class="c1">// OPT: These should be eligible for common subexpression elimination with the AngleAxis
+</span><span class="c1"></span>    <span class="c1">//   constructor above.
+</span><span class="c1"></span>    <span class="k">auto</span> <span class="k">const</span> <span class="n">cos_theta_2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.5f</span><span class="o">*</span><span class="n">theta</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sin_theta_2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.5f</span><span class="o">*</span><span class="n">theta</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sin_theta</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="o">*</span><span class="n">cos_theta_2</span><span class="o">*</span><span class="n">sin_theta_2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">om_cos_theta</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="o">*</span><span class="n">sin_theta_2</span><span class="o">*</span><span class="n">sin_theta_2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">dot_term</span> <span class="o">=</span> <span class="n">dtheta_hat</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span><span class="o">*</span><span class="n">dtheta_hat</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">dx_body0</span> <span class="o">=</span> <span class="n">dot_term</span> <span class="o">+</span> <span class="p">(</span><span class="n">sin_theta</span><span class="o">*</span><span class="p">(</span><span class="n">dx</span> <span class="o">-</span> <span class="n">dot_term</span><span class="p">)</span> <span class="o">+</span> <span class="n">om_cos_theta</span><span class="o">*</span><span class="n">dtheta_hat</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">dx</span><span class="p">))</span><span class="o">/</span><span class="n">theta</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span><span class="p">.</span><span class="n">_transformVector</span><span class="p">(</span><span class="n">dx_body0</span><span class="p">),</span> <span class="n">r</span><span class="o">*</span><span class="n">dr</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// Pure translation
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span><span class="p">.</span><span class="n">_transformVector</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="n">r</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+    <p>This propagation can be applied for each new measurement and is independent of the durations of the intervals they are made over.  Compared to an inertial navigation system, it takes no account of sensor noise and provides a low order of accuracy with respect to measurement interval.  But for tracking a desired state based on input from a 6-DOF controller, especially if updates are irregular, it’s probably the ideal solution.</p>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

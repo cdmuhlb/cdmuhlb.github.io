@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coloring the galaxy · Curran D. Muhlberger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/syntax.css" />
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/cc-icons.css" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-16.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Curran D. Muhlberger</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/research/">Research</a></li>
+
+        <li><a href="/software/">Software</a></li>
+
+        <li class="active"><a href="/writing/">Writing</a></li>
+
+        <li><a href="/about/">About</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+</header>
+    <div class="container">
+
+<article>
+  <header class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1>Coloring the galaxy <small><time datetime="2013-10-20T22:33:00-04:00">October 20, 2013</time></small></h1>
+        <p class="lead">or: How I spend my weekends</p>
+      </div>
+    </div>
+  </header>
+<div class="row">
+  <div class="col-md-12">
+    <p><img class="img-responsive img-rounded" src="/assets/images/articles/coloring_the_galaxy/FitSky90_9e23-1200.jpg" alt="Milky Way rendering" /></p>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-md-8">
+    <p>How does one take a picture of the Milky Way?  With good technique and the right equipment you can do so with a camera, an opportunity I try not to miss when vacationing under the dark skies of the American West (see <a href="/assets/images/articles/coloring_the_galaxy/IMGP5094-2048LR.jpg">photo</a>).  But stray light and sensor noise limit the dynamic range achievable with this technique.  Is there another approach?  Well, if we knew where all the stars in the night sky were, we could render their light with any brightness, field-of-view, or PSF we wished.  And thanks to the <a href="http://www.ipac.caltech.edu/2mass/">Two Micron All-Sky Survey (2MASS)</a>, we have precisely the data we need.</p>
+    <p>Unfortunately, the dataset is formidable in size, and it’s not obvious how to to extract the information we want.  In particular, how bright is each star, and what color are they?  I was curious about these questions recently, so here is the approach I took to answer them.  The resulting source code is available in my <a href="https://github.com/cdmuhlb/TooMassFun">TooMassFun</a> repository on GitHub.</p>
+    <p>Having acquired the 40 GB (compressed) dataset (hooray for university Internet), there are immediately two questions we need to answer:</p>
+    <ol>
+      <li>Which fields are relevant to our solution?</li>
+      <li>How can we extract those fields from the provided data?</li>
+    </ol>
+    <p>The PSC fields are documented on the <a href="http://www.ipac.caltech.edu/2mass/releases/allsky/doc/sec2_2a.html">2MASS website</a>.  To make an image, we need to know three things: position, brightness, and color.  Position is straightforward – the “ra” and “dec” fields are basically longitude and latitude for the sky.  They are measured in degrees: 0°–360° and -90°–90°.  Brightness and color are less obvious, though.  The stars in this catalog have been measured in three near-IR filters (J,H,Ks), and the measured flux in each band has been converted to a magnitude.  One approach would be to choose one of the bands as a proxy for visible brightness, but this is ad-hoc and wouldn’t give any indication of color.  Instead, we will assume that stars are black-body radiators, fit a Planck distribution to these fluxes, and derive both color and brightness from this distribution.  The details will come later; what’s important is that these three magnitudes are sufficient for the job.</p>
+    <p>Now that know which fields we need (columns 1, 2, 7, 11, & 15, along with 9, 13, and 17 to take advantage of uncertainties when fitting), how do we extract them?  The columns are delimited by pipes (‘|’), and the data is gzip compressed.  I chose to use <a href="http://scala-lang.org/">Scala</a> for the parser here (see <a href="https://github.com/cdmuhlb/TooMassFun/tree/master/PscConvert">PscConvert</a>), since it makes it easy to read gzipped data, split lines of text on delimiters, convert strings to numbers, and perform tasks in parallel (there are 92 files, after all).  Furthermore, I just like the language.  What comes next?  Well, here’s where things get technical.</p>
+    <p>A lot can happen to a photon between a star and a detector.  It could be scattered by the ISM, absorbed by the atmosphere, deflected by the telescope, or just fail to interact with the sensor.  Thankfully, the survey team has derived calibrations to account for most of these effects.  Using the parameters in the <a href="http://www.ipac.caltech.edu/2mass/releases/allsky/doc/sec6_4a.html">2MASS explanatory supplement</a>, along with the definition of “magnitude” (an incredibly frustrating unit), we can convert filter magnitudes to integrated energy fluxes and propagate their uncertainties as well.  These fluxes correspond to photons hitting the top of the Earth’s atmosphere that lie within an effective bandpass for each filter.  In other words, we can now characterize some small portions of each star’s spectrum as it would be observed by a satellite orbiting the Earth.</p>
+    <p>Now our assumption that stars are black-body radiators is a pretty good one, but by the time the photons have reached Earth, their interactions with the ISM mean that their spectrum is no longer guaranteed to be Planckian.  For the purposes of this project, however, we neglect this effect.  The spectrum’s deviation from a black-body form is probably small (especially given our artistic purpose), and correcting for it would take us beyond the scope of this dataset.</p>
+    <p>So our goal is now to fit a Planck distribution to these three measurements.  Such a distribution is described by only two parameters: a “temperature”, and an overall amplitude scale.  Since the function is linear in the amplitude, this reduces to a 1D minimization problem for the residual as a function of temperature.  I chose to implement this procedure in C using routines from <a href="http://www.gnu.org/software/gsl/">GSL</a> (see <a href="https://github.com/cdmuhlb/TooMassFun/tree/master/mags2temp">mags2temp</a>).</p>
+    <p>Once we have the parameters of each star’s spectral distributions, computing their colors and brightnesses is formally straightforward.  Working in CIE XYZ space, we simply integrate each star’s distribution against three different color matching functions, available from <a href="http://www.cvrl.org/cmfs.htm">CVRL</a>.  From there, converting to sRGB for display on a computer is simply a matter of looking up the conversion formulas.  But for the moment, we’ll stick to CIE XYZ for one simple reason: it’s linear.  In other words, to compute the color resulting from seeing two stars at once, you simply add their color coordinates (this is NOT true of gamma-corrected color spaces like sRGB).</p>
+    <p>Now that we know the brightness and color of each star, along with their positions, it’s time to generate an image.  This is a perfect job for GPUs!  I chose to implement the following procedures in C++ and <a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> (see <a href="https://github.com/cdmuhlb/TooMassFun/tree/master/SkyRender">SkyRender</a>), making use of the <a href="http://opencv.org/">OpenCV</a> library (which I learned to use in Udacity’s <a href="https://www.udacity.com/course/cs344">CS344</a> course).  Most of the remaining operations are pretty simple: figure out the pixel location of each star from its sky coordinates (many projections are possible, but we’ll keep things simple and cylindrical), add the colors from all stars at each pixel, truncate to an overall brightness scale, and convert to sRGB.  But there’s one thing missing: when starlight hits any optical system, whether a telescope or the human eye, its light spreads out over the detector according to a “point spread function.”  Mathematically, this is a convolution with some instrument-specific kernel.  For our purposes, we could compute the kernel for some idealized telescope (which would take the form of an Airy disk), or we could invent our own kernel optimized for aesthetics.  Some colleagues of mine found “exp(-sqrt(r/w))” to work well, where “r” is the distance in pixels from the center of the star and “w” is a characteristic width, chosen to taste.</p>
+    <p>Combining all these pieces gives us the image above.  Thus, with a mix of statistics, physics, color theory, and programming, along with a great open dataset, we can create beautiful renderings of the night sky without ever having to freeze our fingers off outdoors.  I hope you enjoyed this little problem-solving adventure; you now have a pretty good idea of how graduate students spend their weekends ☺.</p>
+    <p>[authoring in-progress; additional figures pending]</p>
+  </div>
+  <div class="col-md-4">
+    <p><a href="/assets/images/articles/coloring_the_galaxy/IMGP5094-2048LR.jpg"><img class="img-responsive img-rounded" src="/assets/images/articles/coloring_the_galaxy/IMGP5094-768.jpg" alt="Milky Way over Bryce Canyon" /></a></p>
+    <div class="caption">
+      <p><i>Milky Way over Bryce Canyon</i>, 28 August 2013</p>
+    </div>
+  </div>
+</div>
+
+</article>
+
+      <hr />
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="text-center"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="ccicon ccicon-cc"></span> <span class="ccicon ccicon-by"></span></a> Except where otherwise noted, this work by <a prefix="cc: http://creativecommons.org/ns#" href="http://www.muhlbergerweb.com/" property="cc:attributionName" rel="cc:attributionURL">Curran D. Muhlberger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
