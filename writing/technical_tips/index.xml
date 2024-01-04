@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technical tips on Curran D. Muhlberger</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Technical tips on Curran D. Muhlberger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Apr 2017 01:45:00 -0700</lastBuildDate>
-    
-	<atom:link href="http://www.muhlbergerweb.com/writing/technical_tips/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 22 Apr 2017 01:45:00 -0700</lastBuildDate><atom:link href="http://www.muhlbergerweb.com/writing/technical_tips/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>X11 input configs</title>
       <link>http://www.muhlbergerweb.com/writing/technical_tips/x11_inputs/</link>

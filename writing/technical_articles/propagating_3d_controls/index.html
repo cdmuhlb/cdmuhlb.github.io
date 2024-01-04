@@ -74,7 +74,7 @@
       <li>Compute <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>1</mn><mo>-</mo><mfrac><mrow><mo lspace="0em" rspace="0em">sin</mo><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mi>θ</mi></mfrac></mrow></math> via Taylor series for small <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>θ</mi></math> (to again avoid loss of precision from naïve subtraction)</li>
     </ol>
     <p>One could consider optimizing for the purely rotational case as well.  Also, be aware of any normalization requirements when using quaternion libraries (my personal view is that quaternions should be left unnormalized, with division by the norm taking place in any rotation operations, but that’s a subject for another article).  A production-ready version of this procedure might thus look like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/**
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/**
 </span><span class="cm"> * Compute `1 - sin(x)/x`, maintaining precision even when `x` is small.
 </span><span class="cm"> * Computation is &#34;assisted&#34; by taking `sin(x)` as an argument; this avoids
 </span><span class="cm"> * recomputation if `sin(x)` is used elsewhere by the caller (in case common
@@ -136,8 +136,7 @@
     <span class="c1">// Pure translation
 </span><span class="c1"></span>    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span><span class="p">.</span><span class="n">_transformVector</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="n">r</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
     <p>This propagation can be applied for each new measurement and is independent of the durations of the intervals they are made over.  Compared to an inertial navigation system, it takes no account of sensor noise and provides a low order of accuracy with respect to measurement interval.  But for tracking a desired state based on input from a 6-DOF controller, especially if updates are irregular, it’s probably the ideal solution.</p>
   </div>
 </div>

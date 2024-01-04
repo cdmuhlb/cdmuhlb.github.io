@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizza calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+<body>
+  <div class="container">
+    <h1>Pizza recipe</h1>
+    <h2>Ingredients calculator</h2>
+    <form id="pizzaForm">
+
+<div class="row mb-3">
+  <label for="inputDoughTotal" class="col-3 col-form-label">Dough per pizza</label>
+  <div class="col-2">
+    <input type="number" id="inputDoughTotal" class="form-control" value="250" min="0" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="inputPrefermentHydration" class="col-3 col-form-label">Preferment hydration</label>
+  <div class="col-2">
+    <input type="number" id="inputPrefermentHydration" class="form-control" value="100" min="0" />
+  </div>
+  <div class="col">
+    <span class="form-text">% (Poolish: 100%; Biga: 60%)</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="inputDoughHydration" class="col-3 col-form-label">Dough hydration</label>
+  <div class="col-2">
+    <input type="number" id="inputDoughHydration" class="form-control" value="70" min="0" />
+  </div>
+  <div class="col">
+    <span class="form-text">%</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="inputWaterFromPreferment" class="col-3 col-form-label">Water from preferment</label>
+  <div class="col-2">
+    <input type="number" id="inputWaterFromPreferment" class="form-control" value="100" min="0" max="100" />
+  </div>
+  <div class="col">
+    <span class="form-text">%</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="inputNumPizzas" class="col-3 col-form-label">Number of pizzas</label>
+  <div class="col-2">
+    <input type="number" id="inputNumPizzas" class="form-control" value="3" min="0" />
+  </div>
+</div>
+
+<button type="submit" class="btn btn-primary mb-3">Update</button>
+
+<hr />
+
+<div class="row mb-3">
+  <label for="outputPrefermentWater" class="col-3 col-form-label">Water in preferment</label>
+  <div class="col-2">
+    <input type="text" id="outputPrefermentWater" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputPrefermentFlour" class="col-3 col-form-label">Flour in preferment</label>
+  <div class="col-2">
+    <input type="text" id="outputPrefermentFlour" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputPrefermentYeast" class="col-3 col-form-label">Yeast in preferment</label>
+  <div class="col-2">
+    <input type="text" id="outputPrefermentYeast" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputPrefermentHoney" class="col-3 col-form-label">Honey in preferment</label>
+  <div class="col-2">
+    <input type="text" id="outputPrefermentHoney" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputPrefermentTotal" class="col-3 col-form-label">(Total preferment)</label>
+  <div class="col-2">
+    <input type="text" id="outputPrefermentTotal" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputDoughWater" class="col-3 col-form-label">Additional water in dough</label>
+  <div class="col-2">
+    <input type="text" id="outputDoughWater" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputDoughFlour" class="col-3 col-form-label">Additional flour in dough</label>
+  <div class="col-2">
+    <input type="text" id="outputDoughFlour" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+<div class="row mb-3">
+  <label for="outputDoughSalt" class="col-3 col-form-label">Salt in dough</label>
+  <div class="col-2">
+    <input type="text" id="outputDoughSalt" class="form-control" readonly="readonly" />
+  </div>
+  <div class="col">
+    <span class="form-text">g</span>
+  </div>
+</div>
+
+    </form>
+
+    <h3>Equipment and unmeasured ingredients</h3>
+    <ul>
+      <li>Sealable container</li>
+      <li>Olive oil</li>
+      <li>Bench scraper or pizza spatula</li>
+      <li>Semolina flour</li>
+      <li>Oven capable of reaching 550°F</li>
+      <li>Pizza steel</li>
+      <li>Pizza peel (can improvise with large cutting board)</li>
+      <li>Parchment paper</li>
+      <li>Blender</li>
+    </ul>
+
+    <h3>Toppings (margherita)</h3>
+    <ul>
+      <li>14 oz can of whole or crushed tomatoes</li>
+      <li>1/2 tsp salt</li>
+      <li>Olive oil</li>
+      <li>Fresh basil leaves</li>
+      <li>Fresh mozzarella (pearls are most convenient)</li>
+      <li>Parmesan</li>
+    </ul>
+
+    <h2>Directions</h2>
+    <h3>Preferment (poolish)&mdash;the day before</h3>
+    <p>Prepare the preferment at least 1 hr before bedtime the day before you plan to cook pizza.</p>
+    <ol>
+      <li>Mix water, yeast, and honey in sealable container.</li>
+      <li>Mix flour into mixture.</li>
+      <li>Seal container and leave at room temperature for 1 hr.</li>
+      <li>Transfer container to refrigerator for 16&ndash;24 hr (i.e., chill overnight).</li>
+    </ol>
+    <p>The preferment will double in size, so choose a container approximately three times the initial volume of the mixed ingredients.</p>
+    <h3>Dough&mdash;the day of</h3>
+    <h4>First rise</h4>
+    <ol>
+      <li>Add salt and additional flour/water (half at a time) to bowl with preferment and fold with spatula.</li>
+      <li>Knead dough to integrate flour.  Note that dough will initially be very wet and sticky.  Options include:
+        <ul>
+          <li>Transfer to counter and knead by hand for 10&ndash;15 minutes until the dough is noticably less sticky.  Do not add any additional flour or oil&mdash;the dough <em>will</em> come together with enough work.</li>
+          <li>Mix in stand mixer with dough hook for 10 minutes until the dough comes together.</li>
+          <li>Mix in food processor with blade for 30&ndash;60 seconds (note: this method is the fastest but requires the most cleanup).</li>
+        </ul></li>
+      <li>Collect dough with bench scraper or pizza spatula, then rest on counter for 5&ndash;10 minutes.</li>
+      <li>Add olive oil to fingers, then tap top of dough.  From this point forward, keep track of which side of the dough is the top.</li>
+      <li>Form dough into ball.  Quickly lift using fingers of each hand on opposite sides, then lower while rolling slightly.  Repeat with a quarter turn between each lift and drop until top of ball forms a tight skin.</li>
+      <li>Lightly oil a sealable container, then transfer dough ball to container, keeping the top facing up.  Seal container and let rise at room temperature.
+        <p>Rise time depends on proportion of water coming from preferment.  If no additional water is added to dough, rise time can be as short as 1 hour.</p></li>
+    </ol>
+    <h4>Second rise</h4>
+    <ol>
+      <li>Place pizza steel in oven and preheat to 550°F or higher.  Consider convection bake.</li>
+      <li>Transfer dough ball from container to counter, keeping top on top.</li>
+      <li>Divide dough into sections for desired number of pizzas, cutting with a bench scraper or pizza spatula.</li>
+      <li>Form each section into a ball by pushing through a circle formed with the thumb and middle finger of one hand, keeping top on top.  Close bottom of ball, place on counter, and cover.</li>
+      <li>Let dough balls rise until doubled in size.
+        <p>Rise time depends on proportion of water coming from preferment.  If no additional water is added to dough, rise time can be as short as 20&ndash;30 minutes.</p></li>
+    </ol>
+    <h3>Sauce</h3>
+    <p>Blend tomatoes, salt, olive oil, and torn basil leaves.</p>
+    <h3>Shaping and assembly</h3>
+    <p>For each pizza:</p>
+    <ol>
+      <li>Pour a generous pile of semolina flour (or 50/50 mixture of semolina and all-purpose flour) onto counter (this flour can be collected and reused).</li>
+      <li>Using a bench scraper or pizza spatula, pick up a dough ball and flip it onto the flour pile, top-down.  Gently press the dough into the flour with your fingers.</li>
+      <li>Flip the dough upside down so that the top is up again.  With your fingers, repeatedly press straight down on the center of the dough, flattening the center while leaving a 3/4&ndash;1 inch rim.</li>
+      <li>Clear the flour off to the side, the stretch the dough (see tutorials elsewhere).  Place stretch dough onto parchment paper on peel.</li>
+      <li>Ladle tomato sauce onto dough and distribute.</li>
+      <li>Transfer parchment paper to pizza steel in oven and bake for 2 minutes, until crust is golden.</li>
+      <li>Transfer back to peel, then top with grated parmesan, mozzarella pearls/cubes, and torn basil leaves.  Brush crust with olive oil.</li>
+      <li>Transfer pizza back to pizza steel (leaving parchment paper behind if possible) and bake for 3 minutes, until mozzarella starts to bubble.</li>
+      <li>Transfer pizza to cooling rack for 2 minutes while preparing next pizza, then slice and enjoy hot.</li>
+    </ol>
+  </div>
+
+  <script>
+"use strict"
+
+window.onload = () => {
+  const form = document.getElementById("pizzaForm");
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    computePizzaIngredients();
+  });
+  form.querySelectorAll("input").forEach(input => {
+    input.addEventListener("change", event => {
+      computePizzaIngredients();
+    });
+  });
+  computePizzaIngredients();
+};
+
+function numberValue(elementId) {
+  const element = document.getElementById(elementId);
+  const ans = Number(element.value);
+  if (isNaN(ans) || ans < 0) {
+    element.classList.add("is-invalid");
+  } else {
+    element.classList.remove("is-invalid");
+  }
+  return ans;
+}
+function computePizzaIngredients() {
+  const doughTotal = numberValue("inputDoughTotal");
+  const waterFromPreferment = numberValue("inputWaterFromPreferment") / 100.0;
+  const prefermentHydration = numberValue("inputPrefermentHydration") / 100.0;
+  const doughHydration = numberValue("inputDoughHydration") / 100.0;
+  const numPizzas = numberValue("inputNumPizzas");
+
+  const doughSalt = 4;  // g
+  const prefermentHoneyRatio = 5.0/600.0;
+  const prefermentYeastRatio = 5.0/600.0;
+
+  const prefermentFlour = (doughHydration*(doughSalt - doughTotal)*(-1 + prefermentHoneyRatio + prefermentYeastRatio)*waterFromPreferment)/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment);
+  const prefermentWater = (doughHydration*(doughSalt - doughTotal)*prefermentHydration*(-1 + prefermentHoneyRatio + prefermentYeastRatio)*waterFromPreferment)/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment);
+  const doughWater = -((doughHydration*(doughSalt - doughTotal)*prefermentHydration*(-1 + prefermentHoneyRatio + prefermentYeastRatio)*(-1 + waterFromPreferment))/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment));
+  const doughFlour = ((doughSalt - doughTotal)*(-1 + prefermentHoneyRatio + prefermentYeastRatio)*(prefermentHydration - doughHydration*waterFromPreferment))/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment);
+  const prefermentTotal = -(((doughSalt - doughTotal)*(doughHydration*waterFromPreferment + doughHydration*prefermentHydration*waterFromPreferment))/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment));
+  const prefermentHoney = -((doughHydration*doughSalt*prefermentHoneyRatio*waterFromPreferment - doughHydration*doughTotal*prefermentHoneyRatio*waterFromPreferment + doughHydration*doughSalt*prefermentHoneyRatio*prefermentHydration*waterFromPreferment - doughHydration*doughTotal*prefermentHoneyRatio*prefermentHydration*waterFromPreferment)/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment));
+  const prefermentYeast = -((doughHydration*doughSalt*prefermentYeastRatio*waterFromPreferment - doughHydration*doughTotal*prefermentYeastRatio*waterFromPreferment + doughHydration*doughSalt*prefermentHydration*prefermentYeastRatio*waterFromPreferment - doughHydration*doughTotal*prefermentHydration*prefermentYeastRatio*waterFromPreferment)/(prefermentHydration + doughHydration*prefermentHydration - prefermentHoneyRatio*prefermentHydration - doughHydration*prefermentHoneyRatio*prefermentHydration - prefermentHydration*prefermentYeastRatio - doughHydration*prefermentHydration*prefermentYeastRatio + doughHydration*prefermentHoneyRatio*waterFromPreferment + doughHydration*prefermentHoneyRatio*prefermentHydration*waterFromPreferment + doughHydration*prefermentYeastRatio*waterFromPreferment + doughHydration*prefermentHydration*prefermentYeastRatio*waterFromPreferment));
+
+  const p = 0.5;
+  document.getElementById("outputPrefermentWater").value = roundTo(numPizzas*prefermentWater, p).toFixed(1);
+  document.getElementById("outputPrefermentFlour").value = roundTo(numPizzas*prefermentFlour, p).toFixed(1);
+  document.getElementById("outputPrefermentYeast").value = roundTo(numPizzas*prefermentYeast, p).toFixed(1);
+  document.getElementById("outputPrefermentHoney").value = roundTo(numPizzas*prefermentHoney, p).toFixed(1);
+  document.getElementById("outputPrefermentTotal").value = roundTo(numPizzas*prefermentTotal, p).toFixed(1);
+  document.getElementById("outputDoughWater").value = roundTo(numPizzas*doughWater, p).toFixed(1);
+  document.getElementById("outputDoughFlour").value = roundTo(numPizzas*doughFlour, p).toFixed(1);
+  document.getElementById("outputDoughSalt").value = roundTo(numPizzas*doughSalt, p).toFixed(1);
+}
+
+function roundTo(x, quant) {
+  const quotient = Math.round(x/quant);
+  return quotient*quant;
+}
+  </script>
+</body>
+</html>

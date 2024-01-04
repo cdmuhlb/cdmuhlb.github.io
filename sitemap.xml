@@ -1,110 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>http://www.muhlbergerweb.com/writing/blog/</loc>
     <lastmod>2013-10-20T22:33:00-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/writing/technical_articles/</loc>
     <lastmod>2018-06-03T23:45:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/writing/technical_tips/</loc>
     <lastmod>2017-04-22T01:45:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/writing/product_reviews/</loc>
     <lastmod>2018-11-15T01:15:00-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/product_reviews/photo_gear/</loc>
-    <lastmod>2018-11-15T01:15:00-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_articles/propagating_3d_controls/</loc>
-    <lastmod>2018-06-03T23:45:00-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_tips/x11_inputs/</loc>
-    <lastmod>2017-04-22T01:45:00-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_tips/terminal_tips/</loc>
-    <lastmod>2017-04-21T23:55:00-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/blog/coloring_the_galaxy/</loc>
-    <lastmod>2013-10-20T22:33:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_articles/polynomial_fitting_pitfalls/</loc>
-    <lastmod>2013-09-29T17:25:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_articles/objects_vs_actors/</loc>
-    <lastmod>2013-08-12T00:39:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/blog/surprise_citations/</loc>
-    <lastmod>2013-08-06T03:55:40-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/technical_tips/taming_lightdm/</loc>
-    <lastmod>2012-11-30T12:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/writing/product_reviews/pentax_k5_review/</loc>
-    <lastmod>2012-11-30T11:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/about/</loc>
-  </url>
-  
-  <url>
-    <loc>http://www.muhlbergerweb.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/</loc>
     <lastmod>2018-11-15T01:15:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/writing/</loc>
-  </url>
-  
-  <url>
+    <lastmod>2018-11-15T01:15:00-08:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/product_reviews/photo_gear/</loc>
+    <lastmod>2018-11-15T01:15:00-08:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_articles/propagating_3d_controls/</loc>
+    <lastmod>2018-06-03T23:45:00-07:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_tips/x11_inputs/</loc>
+    <lastmod>2017-04-22T01:45:00-07:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_tips/terminal_tips/</loc>
+    <lastmod>2017-04-21T23:55:00-07:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/blog/coloring_the_galaxy/</loc>
+    <lastmod>2013-10-20T22:33:00-04:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_articles/polynomial_fitting_pitfalls/</loc>
+    <lastmod>2013-09-29T17:25:00-04:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_articles/objects_vs_actors/</loc>
+    <lastmod>2013-08-12T00:39:49-04:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/blog/surprise_citations/</loc>
+    <lastmod>2013-08-06T03:55:40-04:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/technical_tips/taming_lightdm/</loc>
+    <lastmod>2012-11-30T12:00:00-05:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/writing/product_reviews/pentax_k5_review/</loc>
+    <lastmod>2012-11-30T11:00:00-05:00</lastmod>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/about/</loc>
+  </url><url>
+    <loc>http://www.muhlbergerweb.com/categories/</loc>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/software/projects/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/research/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/software/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://www.muhlbergerweb.com/tags/</loc>
-    <priority>0</priority>
   </url>
-  
 </urlset>
